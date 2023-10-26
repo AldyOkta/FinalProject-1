@@ -1,11 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveArticle, unsaveArticle } from '../redux/actions/actions';
 
 export const NewsItem = ({ title, description, url, urlToImage }) => {
   const [isSaved, setIsSaved] = useState(false);
+  const dispatch = useDispatch();
+  const savedArticles = useSelector((state) => state.saved.savedArticles);
+
+  useEffect(() => {
+    // Cek apakah berita ini telah disimpan
+    const isArticleSaved = savedArticles.some((article) => article.url === url);
+    setIsSaved(isArticleSaved);
+  }, [savedArticles, url]);
 
   const handleSave = () => {
- 
-    setIsSaved(true);
+    // Jika belum disimpan, simpan berita ini
+    if (!isSaved) {
+      dispatch(saveArticle({ title, description, url, urlToImage }));
+    } else {
+      // Jika sudah disimpan, hapus berita ini dari daftar yang disimpan
+      dispatch(unsaveArticle({ title, description, url, urlToImage }));
+    }
+    setIsSaved(!isSaved);
+  };
+
+  const openNewsPageInNewTab = () => {
+    window.open(url, '_blank');
   };
 
   return (
@@ -16,18 +36,15 @@ export const NewsItem = ({ title, description, url, urlToImage }) => {
           <h5 className="card-title">{title}</h5>
           <p className="card-text">{description}</p>
           <div className="container">
-            <a href={url} className="btn btn-warning">
+            <a href={url} className="btn btn-warning" onClick={openNewsPageInNewTab}>
               News Page
             </a>
-            {!isSaved ? (
-              <button className="btn btn-primary" onClick={handleSave}>
-                Save
-              </button>
-            ) : (
-              <button className="btn btn-secondary" disabled>
-                Saved
-              </button>
-            )}
+            <button
+              className={isSaved ? 'btn btn-secondary' : 'btn btn-primary'}
+              onClick={handleSave}
+            >
+              {isSaved ? 'Saved' : 'Save'}
+            </button>
           </div>
         </div>
       </div>
