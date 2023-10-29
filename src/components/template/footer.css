@@ -1,15 +1,13 @@
 .footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #ffff;
   padding: 20px 40px;
 }
 .a {
-  font-size: 14px;
+  width: 100%;
+  position: relative;
+  background: #333;
+  margin: 0 10px 10px 0;
+  padding: 10px 0;
+  color: rgba(255, 255, 255, 1);
   text-align: center;
-  background-color: rgb(24, 255, 251);
-  color: #ffff;
-  padding: 10px 0px;
-  margin: 0px;
 }
