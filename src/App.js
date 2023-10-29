@@ -4,9 +4,9 @@ import { Navbar } from './components/template/Navbar';
 import ProgrammingNews from './components/ProgrammingNews';
 import CovidNews from './components/CovidNews';
 import News from './components/News';
-import Saved from './components/Saved'; // Perhatikan penggunaan import yang sudah diperbaiki
+import Saved from './components/Saved';
 import { Provider } from 'react-redux';
-import store from './redux/store'; // Ganti path menjadi ./redux/store
+import store from './redux/store';
 
 function App() {
   return (

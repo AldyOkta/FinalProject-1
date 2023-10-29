@@ -1,4 +1,3 @@
-// savedReducer.js
 import { SAVE_ARTICLE, UNSAVE_ARTICLE, CLEAR_SAVED_ARTICLES } from '../actions/actions';
 
 const initialState = {

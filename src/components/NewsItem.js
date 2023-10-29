@@ -8,17 +8,14 @@ export const NewsItem = ({ title, description, url, urlToImage }) => {
   const savedArticles = useSelector((state) => state.saved.savedArticles);
 
   useEffect(() => {
-    // Cek apakah berita ini telah disimpan
     const isArticleSaved = savedArticles.some((article) => article.url === url);
     setIsSaved(isArticleSaved);
   }, [savedArticles, url]);
 
   const handleSave = () => {
-    // Jika belum disimpan, simpan berita ini
     if (!isSaved) {
       dispatch(saveArticle({ title, description, url, urlToImage }));
     } else {
-      // Jika sudah disimpan, hapus berita ini dari daftar yang disimpan
       dispatch(unsaveArticle({ title, description, url, urlToImage }));
     }
     setIsSaved(!isSaved);

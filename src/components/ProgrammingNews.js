@@ -5,15 +5,14 @@ import { NewsItem } from './NewsItem';
 const ProgrammingNews = () => {
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState(null);
-  const [search, setSearch] = useState(''); // State untuk kata kunci pencarian
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
-    const apiKey = 'YOUR_API_KEY'; // Ganti dengan kunci API Anda dari https://newsapi.org
-
     const getArticles = async () => {
       try {
         const response = await axios.get(
-          `https://newsapi.org/v2/everything?q=programming&from=${getLastMonthDate()}&to=${getCurrentDate()}&pageSize=20&apiKey=f9d9904b2d4a48649d37cb884e56a65f`
+          `https://newsapi.org/v2/top-headlines?country=us&apiKey=cbc528fe7d544d2ba7e5b544d95f97c3`
+          // Ganti 'YOUR_API_KEY' dengan kunci API Anda
         );
         setArticles(response.data.articles);
         setError(null);
@@ -22,24 +21,13 @@ const ProgrammingNews = () => {
       }
     };
     getArticles();
-  }, []); // Di sini kita hanya mendapatkan berita saat komponen dimuat pertama kali
-
-  const getLastMonthDate = () => {
-    const today = new Date();
-    const lastMonth = new Date(today);
-    lastMonth.setMonth(today.getMonth() - 1);
-    return lastMonth.toISOString().split('T')[0];
-  };
-
-  const getCurrentDate = () => {
-    const today = new Date();
-    return today.toISOString().split('T')[0];
-  };
+  }, []);
 
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=${search}&apiKey=f9d9904b2d4a48649d37cb884e56a65f`
+        `https://newsapi.org/v2/everything?q=${search}&apiKey=YOUR_API_KEY`
+        // Ganti 'YOUR_API_KEY' dengan kunci API Anda
       );
       setArticles(response.data.articles);
       setError(null);

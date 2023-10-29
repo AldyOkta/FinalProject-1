@@ -5,10 +5,10 @@ import { NewsItem } from './NewsItem';
 const CovidNews = () => {
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState(null);
-  const [search, setSearch] = useState(''); // State untuk kata kunci pencarian
+  const [search, setSearch] = useState(''); 
 
   useEffect(() => {
-    const apiKey = 'YOUR_API_KEY'; // Ganti dengan kunci API Anda dari https://newsapi.org
+    const apiKey = 'YOUR_API_KEY'; 
 
     const getArticles = async () => {
       try {
@@ -22,7 +22,7 @@ const CovidNews = () => {
       }
     };
     getArticles();
-  }, []); // Di sini kita hanya mendapatkan berita saat komponen dimuat pertama kali
+  }, []); 
 
   const getLastMonthDate = () => {
     const today = new Date();

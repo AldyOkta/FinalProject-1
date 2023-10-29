@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveArticle, unsaveArticle, clearSavedArticles } from '../redux/actions/actions'; // Menambahkan pengimporan aksi yang diperlukan
+import { saveArticle, unsaveArticle, clearSavedArticles } from '../redux/actions/actions';
 import { SavedItem } from './SavedItem';
 
 const Saved = () => {
@@ -8,11 +8,11 @@ const Saved = () => {
   const savedArticles = useSelector((state) => state.saved.savedArticles);
 
   useEffect(() => {
-    // Ambil data dari localStorage saat komponen dimuat pertama kali
+
     const savedArticlesFromStorage = JSON.parse(localStorage.getItem('savedArticles'));
     if (savedArticlesFromStorage) {
       dispatch(clearSavedArticles());
-      savedArticlesFromStorage.forEach((article) => dispatch(saveArticle(article))); // Hapus tanda kurung kurawal yang tidak perlu di sini
+      savedArticlesFromStorage.forEach((article) => dispatch(saveArticle(article)));
     }
   }, [dispatch]);
 
