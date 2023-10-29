@@ -12,8 +12,8 @@ export const News = () => {
       try {
         const response = await axios.get(
           search === ''
-            ? 'https://newsapi.org/v2/everything?q=indonesia&pageSize=20&apiKey=f9d9904b2d4a48649d37cb884e56a65f'
-            : `https://newsapi.org/v2/everything?q=${search}&apiKey=f9d9904b2d4a48649d37cb884e56a65f`
+            ? 'https://newsapi.org/v2/top-headlines?country=id&apiKey=ceae45acc7c04620ad1a3589b1f6f383'
+            : `https://newsapi.org/v2/top-headlines?${search}&country=id&apiKey=ceae45acc7c04620ad1a3589b1f6f383`
         );
         setArticles(response.data.articles);
         setError(null);
@@ -28,16 +28,34 @@ export const News = () => {
     getArticles();
   }, [search]);
 
+    const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        `https://newsapi.org/v2/top-headlines?${search}&country=id&apiKey=ceae45acc7c04620ad1a3589b1f6f383`
+        // Ganti 'YOUR_API_KEY' dengan kunci API Anda
+      );
+      setArticles(response.data.articles);
+      setError(null);
+    } catch (error) {
+      setError('Terjadi kesalahan saat mencari berita: ' + error.message);
+    }
+  };
+
   return (
     <div>
       <div className="container-fluid">
+        <div className="search-container">
         <input
           className="form-control mr-sm-2"
           type="search"
-          placeholder="Search Data"
+          placeholder="Search News Indonesia"
           onChange={(e) => setSearch(e.target.value)}
           aria-label="Search"
         />
+        <button className="btn btn-primary" onClick={handleSearch}>
+          Search
+        </button>
+      </div>
         <h1 className="text-center">News {search}</h1>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <div className="row">

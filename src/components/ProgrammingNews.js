@@ -11,8 +11,7 @@ const ProgrammingNews = () => {
     const getArticles = async () => {
       try {
         const response = await axios.get(
-          `https://newsapi.org/v2/top-headlines?country=us&apiKey=cbc528fe7d544d2ba7e5b544d95f97c3`
-          // Ganti 'YOUR_API_KEY' dengan kunci API Anda
+          `https://newsapi.org/v2/everything?q=programming&pageSize=20&apiKey=f9d9904b2d4a48649d37cb884e56a65f`
         );
         setArticles(response.data.articles);
         setError(null);
@@ -26,7 +25,7 @@ const ProgrammingNews = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=${search}&apiKey=YOUR_API_KEY`
+        `https://newsapi.org/v2/everything?q=programming${search}&pageSize=20&apiKey=f9d9904b2d4a48649d37cb884e56a65f`
         // Ganti 'YOUR_API_KEY' dengan kunci API Anda
       );
       setArticles(response.data.articles);
